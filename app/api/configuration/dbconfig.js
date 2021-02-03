@@ -1,5 +1,5 @@
 exports.settings = {
-  host: "testing. Change back to localhost",
+  host: "localhost",
   port: "3306",
   database: "todo",
   user: "root",

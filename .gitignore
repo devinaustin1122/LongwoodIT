@@ -1,5 +1,5 @@
 # Sensitive information
-dbconfig.js
+dbconfig.js*
 
 # Logs
 logs
