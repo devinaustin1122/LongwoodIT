@@ -8,7 +8,7 @@ var connection = mysql.createConnection({
   port: "3306",
   database: "todo",
   user: "root",
-  password: "",
+  password: "M4nchesterUnited112*",
 });
 
 connection.connect(function (err) {
@@ -82,7 +82,11 @@ router.post("/saveTask/", function (req, res, next) {
       uuid +
       "', 'NS', '" +
       req.body.task +
-      "')"
+      "')",
+    function (err, result, fields) {
+      if (err) throw err;
+      console.log(result);
+    }
   );
   res.json({ id: uuid });
 });
@@ -100,6 +104,21 @@ router.post("/list/create/", function (req, res, next) {
       "')"
   );
   res.json({ id: uuid });
+});
+
+router.post("/login/", function (req, res, next) {
+  const today = new Date();
+  connection.query(
+    "SELECT id FROM users WHERE password = '" + req.body.password + "'",
+    function (err, result, fields) {
+      if (err) throw err;
+      if (result.length) {
+        res.json({ id: result[0].id });
+      } else {
+        res.json({ id: "Access denied" });
+      }
+    }
+  );
 });
 
 module.exports = router;
