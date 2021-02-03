@@ -24,6 +24,7 @@ const Subtask = (props) => {
           />
         </svg>
       </div>
+      <hr />
     </div>
   );
 };
