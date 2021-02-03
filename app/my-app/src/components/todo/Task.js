@@ -42,6 +42,7 @@ const Task = (props) => {
           </svg>
         </Link>
       </div>
+      <hr />
     </div>
   );
 };

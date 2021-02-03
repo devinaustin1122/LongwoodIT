@@ -33,10 +33,10 @@ class Login extends React.Component {
     return (
       <div className="jumbotron m-5">
         <div className="container fade-in">
-          <h1 className="display-4">Login</h1>
+          <h1 className="display-4">Welcome!</h1>
           <p className="lead">
-            If you have an account, please enter your username, password and
-            submit
+            If you have an account, please enter your username and password.
+            Please contact Devin if you would like to create an account.
           </p>
           <form onSubmit={this.handleSubmit}>
             <div className="input-group mb-3">
@@ -60,7 +60,7 @@ class Login extends React.Component {
               />
               <div className="input-group-append">
                 <button className="btn btn-secondary" type="submit">
-                  Button
+                  Log In
                 </button>
               </div>
             </div>
