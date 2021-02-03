@@ -1,5 +1,5 @@
 # Sensitive information
-dbconfig.js*
+api/configuration/*
 
 # Logs
 logs
