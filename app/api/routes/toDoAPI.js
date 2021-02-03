@@ -1,14 +1,16 @@
 var express = require("express");
 var mysql = require("mysql");
+var dbconfig = require("../configuration/dbconfig");
 var router = express.Router();
+
 var { v4: uuidv4 } = require("uuid");
 
 var connection = mysql.createConnection({
-  host: "localhost",
-  port: "3306",
-  database: "todo",
-  user: "root",
-  password: "",
+  host: dbconfig.settings.host,
+  port: dbconfig.settings.port,
+  database: dbconfig.settings.database,
+  user: dbconfig.settings.user,
+  password: dbconfig.settings.password,
 });
 
 connection.connect(function (err) {
