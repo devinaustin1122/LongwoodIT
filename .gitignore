@@ -1,5 +1,5 @@
 # Sensitive information
-api/configuration/*
+app/api/configuration/*
 
 # Logs
 logs
