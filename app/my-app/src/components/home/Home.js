@@ -6,9 +6,10 @@ const Home = () => {
       <div className="container">
         <h1 className="display-4">Longwood IT</h1>
         <p className="lead">
-          This is a modified jumbotron that occupies the entire horizontal space
-          of its parent.
+          The app for organizing your week, your projects and your organization.
         </p>
+        <hr />
+        <p className="lead"></p>
       </div>
     </div>
   );

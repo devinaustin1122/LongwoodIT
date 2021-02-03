@@ -16,19 +16,19 @@ function App(props) {
   ) {
     return <Login />;
   } else {
-    return (
-      <div className="container-fluid p-0">
-        <Navigation />
-        <Switch>
-          <Route exact path={["/", "/Home"]} component={Home} />
-          <Route exact path="/ToDo" component={ToDo} />
-          <Route exact path="/File" component={File} />
-          <Route path="/Manage/:id" component={ManageTask} />
-          <Route path="*" component={FileNotFound} />
-        </Switch>
-      </div>
-    );
-  }
+  return (
+    <div className="container-fluid p-0">
+      <Navigation />
+      <Switch>
+        <Route exact path={["/", "/Home"]} component={Home} />
+        <Route exact path="/ToDo" component={ToDo} />
+        <Route exact path="/File" component={File} />
+        <Route path="/Manage/:id" component={ManageTask} />
+        <Route path="*" component={FileNotFound} />
+      </Switch>
+    </div>
+  );
+  // }
 }
 
 function mapStateToProps(state, props) {
