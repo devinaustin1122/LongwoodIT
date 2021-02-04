@@ -41,7 +41,8 @@ export function saveTask(task) {
     })
       .then((res) => res.json())
       .then((id) => {
-        dispatch({ type: "SAVE_TASK_SUCCESS", task, id });
+        let saved = { ...id, status: "NS", description: task.description };
+        dispatch({ type: "SAVE_TASK_SUCCESS", saved });
       });
   };
 }

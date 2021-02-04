@@ -41,7 +41,6 @@ router.get("/subtasks/:id", function (req, res, next) {
 });
 
 router.get("/lists/:user", function (req, res, next) {
-  console.log("SELECT * FROM lists WHERE user = '" + req.params.user + "'");
   connection.query(
     "SELECT * FROM lists WHERE user = '" + req.params.user + "'",
     function (error, data, fields) {

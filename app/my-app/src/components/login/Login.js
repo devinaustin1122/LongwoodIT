@@ -71,25 +71,10 @@ class Login extends React.Component {
   }
 }
 
-Login.propTypes = {
-  tasks: PropTypes.array.isRequired,
-  actions: PropTypes.object.isRequired,
-  task: PropTypes.object.isRequired,
-  subtasks: PropTypes.array.isRequired,
-};
-
-function mapStateToProps(state, props) {
-  return {
-    tasks: state.tasks,
-    subtasks: state.subtasks,
-    task: state.tasks.find((task) => task.id === props.match.params.id) || {},
-  };
-}
-
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators(userActions, dispatch),
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(null, mapDispatchToProps)(Login);

@@ -34,11 +34,13 @@ class ManageTask extends React.Component {
       this.state.subtask,
       this.props.task.id
     );
+
+    console.log(this.props.subtasks);
     this.setState({ subtask: { description: "" } });
   };
 
   async componentDidMount() {
-    await this.props.actions.loadSubtasks(this.props.match.params.id);
+    await this.props.actions.loadSubtasks(this.props.task.id);
   }
 
   render() {
@@ -55,11 +57,11 @@ class ManageTask extends React.Component {
 
         <div className="jumbotron jumbotron-fluid gradient-h text-light fade-in">
           <div className="container">
-            <div className="row">
-              <div className="col-4">
+            <div className="d-flex justify-content-between">
+              <div>
                 <h2 className="display-4">Task</h2>
               </div>
-              <div className="col-1 offset-7">
+              <div>
                 <Link to={"/ToDo"}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -74,6 +76,7 @@ class ManageTask extends React.Component {
                 </Link>
               </div>
             </div>
+
             <div className="row">
               <div className="col-7 m-0">
                 <p className="lead">{this.props.task.description}</p>
@@ -128,7 +131,7 @@ class ManageTask extends React.Component {
                 {this.props.subtasks &&
                   this.props.subtasks.map(
                     (subtask) =>
-                      subtask.task_id == this.props.match.params.id && (
+                      subtask.task_id == this.props.task.id && (
                         <Subtask
                           handleClick={() => {
                             this.props.actions.deleteSubtask(subtask);
@@ -148,16 +151,13 @@ class ManageTask extends React.Component {
 }
 
 ManageTask.propTypes = {
-  tasks: PropTypes.array.isRequired,
   actions: PropTypes.object.isRequired,
-  match: PropTypes.object.isRequired,
   task: PropTypes.object.isRequired,
   subtasks: PropTypes.array.isRequired,
 };
 
 function mapStateToProps(state, props) {
   return {
-    tasks: state.tasks,
     subtasks: state.subtasks,
     task: state.tasks.active,
   };

@@ -1,23 +1,32 @@
-export default function taskReducer(state = [], action) {
+export default function taskReducer(state = { all: [], active: {} }, action) {
   switch (action.type) {
     case "TASK_SELECTED":
-      return [...state, { active: action.task }];
+      return { all: state.all, active: action.task };
     case "DELETE_TASK":
-      return state.filter((task) => task.id !== action.task.id);
+      return {
+        all: state.all.filter((task) => task.id !== action.task.id),
+        active: state.active,
+      };
     case "LOAD_TASKS_SUCCESS":
-      return action.tasks;
+      return { all: action.tasks, active: state.active };
     case "SAVE_TASK_SUCCESS":
-      return [...state, { ...action.task, ...action.id, status: "NS" }];
+      return {
+        all: [...state.all, action.saved],
+        active: state.active,
+      };
     case "STATUS_CHANGE":
-      return state.map((task) => {
-        if (task.id === action.id) {
-          let tmp = { ...task };
-          tmp.status = action.status;
-          return tmp;
-        } else {
-          return task;
-        }
-      });
+      return {
+        all: state.all.map((task) => {
+          if (task.id === action.id) {
+            let tmp = { ...task };
+            tmp.status = action.status;
+            return tmp;
+          } else {
+            return task;
+          }
+        }),
+        active: state.active,
+      };
     default:
       return state;
   }

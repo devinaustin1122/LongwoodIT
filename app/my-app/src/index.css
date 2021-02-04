@@ -83,3 +83,8 @@ p {
 .footer {
   background-color: white;
 }
+
+.h-600 {
+  min-height: 600;
+  max-height: 600;
+}

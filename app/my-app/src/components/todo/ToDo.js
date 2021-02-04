@@ -4,7 +4,6 @@ import * as taskActions from "../../redux/actions/taskActions";
 import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
 import Task from "./Task.js";
-import { Link } from "react-router-dom";
 import DropdownInput from "../common/DropdownInput";
 
 class ToDo extends React.Component {
@@ -15,25 +14,26 @@ class ToDo extends React.Component {
     loaded: false,
   };
 
-  componentDidMount() {
-    this.props.actions.loadTasks();
+  async componentDidMount() {
+    await this.props.actions.loadTasks();
+    console.log(this.props.tasks);
   }
 
   handleChange = (event) => {
+    event.preventDefault();
     const task = { ...this.state.task, description: event.target.value };
     this.setState({ task: task });
   };
 
-  handleSubmit = (event) => {
+  handleSubmit = async (event) => {
     event.preventDefault();
-    this.props.actions.saveTask(this.state.task);
+    await this.props.actions.saveTask(this.state.task);
     this.setState({ task: { description: "" } });
   };
 
   handleTaskClick = async (task) => {
     await this.props.actions.selectTask(task);
-    console.log(this.props.tasks);
-    //this.props.history.push("/Manage");
+    this.props.history.push("/Manage");
   };
 
   render() {
@@ -95,7 +95,7 @@ ToDo.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    tasks: state.tasks,
+    tasks: state.tasks.all,
   };
 }
 
