@@ -10,24 +10,24 @@ import { Switch, Route } from "react-router-dom";
 import { connect } from "react-redux";
 
 function App(props) {
-  // if (props.user.length === 0) {
-  //   return <Login />;
-  // } else {
-  return (
-    <div className="container-fluid p-0">
-      <Navigation />
-      <Switch>
-        <Route exact path={["/", "/Home"]} component={Home} />
-        <Route exact path="/File" component={File} />
-        <Route path="/ToDo" component={ToDo} />
-        <Route path="/ToDo/:list" component={ToDo} />
-        <Route path="/Manage" component={ManageTask} />
-        <Route path="*" component={FileNotFound} />
-      </Switch>
-    </div>
-  );
+  if (props.user.length === 0) {
+    return <Login />;
+  } else {
+    return (
+      <div className="container-fluid p-0">
+        <Navigation />
+        <Switch>
+          <Route exact path={["/", "/Home"]} component={Home} />
+          <Route exact path="/File" component={File} />
+          <Route path="/ToDo" component={ToDo} />
+          <Route path="/ToDo/:list" component={ToDo} />
+          <Route path="/Manage" component={ManageTask} />
+          <Route path="*" component={FileNotFound} />
+        </Switch>
+      </div>
+    );
+  }
 }
-// }
 
 function mapStateToProps(state, props) {
   return {
