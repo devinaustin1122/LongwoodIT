@@ -33,7 +33,7 @@ class ToDo extends React.Component {
     return (
       <>
         <div className="jumbotron jumbotron-fluid m-0 p-0">
-          <div className="container collapse" id="collapser">
+          <div className="container collapse show" id="collapser">
             <div className="container ">
               <h1 className="display-4 m-0 pt-3">ToDo</h1>
             </div>

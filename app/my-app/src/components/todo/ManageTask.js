@@ -40,7 +40,7 @@ class ManageTask extends React.Component {
     return (
       <>
         <div className="jumbotron jumbotron-fluid m-0 p-0">
-          <div className="container collapse" id="collapser">
+          <div className="container collapse show" id="collapser">
             <p className="lead pt-4 mb-0">Add subtasks</p>
             <form onSubmit={this.handleSubmit}>
               <div className="input-group mb-3">
