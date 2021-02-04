@@ -1,5 +1,7 @@
 export default function taskReducer(state = [], action) {
   switch (action.type) {
+    case "TASK_SELECTED":
+      return [...state, { active: action.task }];
     case "DELETE_TASK":
       return state.filter((task) => task.id !== action.task.id);
     case "LOAD_TASKS_SUCCESS":

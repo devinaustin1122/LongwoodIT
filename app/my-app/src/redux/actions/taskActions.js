@@ -63,3 +63,7 @@ export function updateStatus(task, status) {
     });
   };
 }
+
+export function selectTask(task) {
+  return { type: "TASK_SELECTED", task };
+}

@@ -22,8 +22,25 @@ hr {
   border-color: transparent;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5 {
+  animation: fadeInAnimation ease 1s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
 p {
   line-height: 1.3;
+  animation: fadeInAnimation ease 2s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+.black {
+  background-color: gray;
 }
 
 .transparent {
@@ -61,4 +78,8 @@ p {
   100% {
     opacity: 1;
   }
+}
+
+.footer {
+  background-color: white;
 }

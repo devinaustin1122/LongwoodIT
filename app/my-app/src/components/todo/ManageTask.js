@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
 import { Link } from "react-router-dom";
 import Subtask from "./Subtask.js";
+import DropdownInput from "../common/DropdownInput.js";
 
 class ManageTask extends React.Component {
   state = {
@@ -20,6 +21,12 @@ class ManageTask extends React.Component {
     this.setState({ subtask: subtask });
   };
 
+  handleDelete = (event) => {
+    event.preventDefault();
+    this.props.actions.deleteTask(this.props.task);
+    this.props.history.push("/ToDo");
+  };
+
   handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -31,55 +38,20 @@ class ManageTask extends React.Component {
   };
 
   async componentDidMount() {
-    await this.props.actions.loadTasks();
     await this.props.actions.loadSubtasks(this.props.match.params.id);
   }
 
   render() {
-    console.log("render");
     return (
       <>
-        <div className="jumbotron jumbotron-fluid m-0 p-0">
-          <div className="container collapse show" id="collapser">
-            <p className="lead pt-4 mb-0">Add subtasks</p>
-            <form onSubmit={this.handleSubmit}>
-              <div className="input-group mb-3">
-                <input
-                  className="form-control "
-                  placeholder="Enter a subtask"
-                  onChange={this.handleSubtaskChange}
-                  value={this.state.subtask.description}
-                />
-                <div className="input-group-append">
-                  <button className="btn btn-secondary" type="submit">
-                    Add
-                  </button>
-                </div>
-              </div>
-            </form>
-          </div>
-          <button
-            className="btn btn-link m-0 pb-1"
-            type="button"
-            data-toggle="collapse"
-            data-target="#collapser"
-            aria-expanded="true"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="black"
-              className="bi bi-arrows-expand"
-              viewBox="0 0 16 16"
-            >
-              <path
-                fillRule="evenodd"
-                d="M1 8a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13A.5.5 0 0 1 1 8zM7.646.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 1.707V5.5a.5.5 0 0 1-1 0V1.707L6.354 2.854a.5.5 0 1 1-.708-.708l2-2zM8 10a.5.5 0 0 1 .5.5v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 0 1 .708-.708L7.5 14.293V10.5A.5.5 0 0 1 8 10z"
-              />
-            </svg>
-          </button>
-        </div>
+        <DropdownInput
+          handleSubmit={this.handleSubmit}
+          handleChange={this.handleSubtaskChange}
+          handleDelete={this.handleDelete}
+          value={this.state.subtask.description}
+          title="Subtask"
+          comment="Manage your task"
+        />
 
         <div className="jumbotron jumbotron-fluid gradient-h text-light fade-in">
           <div className="container">
@@ -153,7 +125,7 @@ class ManageTask extends React.Component {
             <div className="row mt-2">
               <div className="col-12">
                 <h1 className="display-4">Subtasks</h1>
-                {this.props.subtasks.length > 0 &&
+                {this.props.subtasks &&
                   this.props.subtasks.map(
                     (subtask) =>
                       subtask.task_id == this.props.match.params.id && (
@@ -187,7 +159,7 @@ function mapStateToProps(state, props) {
   return {
     tasks: state.tasks,
     subtasks: state.subtasks,
-    task: state.tasks.find((task) => task.id === props.match.params.id) || {},
+    task: state.tasks.active,
   };
 }
 

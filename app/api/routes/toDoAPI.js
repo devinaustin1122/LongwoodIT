@@ -40,6 +40,17 @@ router.get("/subtasks/:id", function (req, res, next) {
   );
 });
 
+router.get("/lists/:user", function (req, res, next) {
+  console.log("SELECT * FROM lists WHERE user = '" + req.params.user + "'");
+  connection.query(
+    "SELECT * FROM lists WHERE user = '" + req.params.user + "'",
+    function (error, data, fields) {
+      if (error) throw error;
+      res.json(data);
+    }
+  );
+});
+
 // POST requests
 
 router.post("/delete/", function (req, res, next) {
@@ -95,14 +106,13 @@ router.post("/saveTask/", function (req, res, next) {
 
 router.post("/list/create/", function (req, res, next) {
   const uuid = uuidv4();
-  const today = new Date();
   connection.query(
-    "INSERT INTO lists (id, name, date) VALUES ('" +
+    "INSERT INTO lists (id, name, user) VALUES ('" +
       uuid +
       "','" +
       req.body.name +
       "', '" +
-      today +
+      req.body.user +
       "')"
   );
   res.json({ id: uuid });

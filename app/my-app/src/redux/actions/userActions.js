@@ -12,7 +12,6 @@ export function login(user, password) {
     })
       .then((res) => res.json())
       .then((id) => {
-        debugger;
         dispatch({ type: "LOGIN", user, ...id });
       });
   };

@@ -1,75 +1,74 @@
 import React from "react";
 import { connect } from "react-redux";
-import * as taskActions from "../../redux/actions/taskActions";
+import * as listActions from "../../redux/actions/listActions";
 import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
-import Task from "../todo/Task.js";
+import List from "../file/List.js";
+import DropdownInput from "../common/DropdownInput.js";
 
 class File extends React.Component {
+  state = {
+    list: {
+      name: "",
+    },
+  };
+
   componentDidMount() {
-    this.props.actions.loadTasks();
+    this.props.actions.loadLists(this.props.user);
   }
 
-  onCreateSubmit = (event) => {
+  handleSubmit = (event) => {
     event.preventDefault();
+    this.props.actions.createList(this.props.user, this.state.list.name);
   };
 
-  onLoadSubmit = (event) => {
+  handleChange = (event) => {
     event.preventDefault();
-  };
-
-  onDeleteSubmit = (event) => {
-    event.preventDefault();
+    this.setState({ list: { name: event.target.value } });
   };
 
   render() {
     return (
-      <div className="jumbotron jumbotron-fluid text-light gradient-h fade-in">
-        <div className="container">
-          <h1 className="display-4 text-light">Add a new task list</h1>
-          <form onSubmit={this.onCreateSubmit}>
-            <div className="input-group">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="List name"
-                aria-label="List name"
-              />
-              <div className="input-group-append">
-                <button className="btn btn-secondary" type="submit">
-                  Add
-                </button>
-              </div>
-            </div>
-          </form>
-          {this.props.tasks.map((task) => {
+      <>
+        <DropdownInput
+          handleSubmit={this.handleSubmit}
+          handleChange={this.handleChange}
+          value={this.state.list.name}
+          title="Manage Task Lists"
+          comment=""
+        />
+
+        <div className="countainer-fluid p-5 text-light gradient-h fade-in">
+          {" "}
+          {this.props.lists.map((list) => {
             return (
               <>
                 <hr />
-                <Task key={task.id} task={task} />
+                <List list={list} />
               </>
             );
           })}
         </div>
-      </div>
+      </>
     );
   }
 }
 
 File.propTypes = {
-  tasks: PropTypes.array.isRequired,
+  lists: PropTypes.array.isRequired,
   actions: PropTypes.object.isRequired,
 };
 
 function mapStateToProps(state) {
   return {
-    tasks: state.tasks,
+    lists: state.lists,
+    user: state.users.active,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(taskActions, dispatch),
+    actions: bindActionCreators(listActions, dispatch),
   };
 }
 

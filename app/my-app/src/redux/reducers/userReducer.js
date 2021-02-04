@@ -1,10 +1,10 @@
-export default function taskReducer(state = {}, action) {
+export default function taskReducer(state = { active: "" }, action) {
   switch (action.type) {
     case "LOGIN":
       if (action.user === action.id) {
-        return action.id;
+        return { active: action.id };
       } else {
-        return state;
+        return { active: "this needs to be changed" };
       }
     default:
       return state;

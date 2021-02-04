@@ -2,7 +2,7 @@ import React from "react";
 
 const FileNotFound = () => {
   return (
-    <div className="jumbotron jumbotron-fluid fade-in">
+    <div className="jumbotron jumbotron-fluid">
       <div className="container">
         <h1 className="display-4">Sorry!</h1>
         <p className="lead">
