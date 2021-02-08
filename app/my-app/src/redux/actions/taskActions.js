@@ -17,9 +17,9 @@ export function deleteTask(task) {
   };
 }
 
-export function loadTasks() {
+export function loadTasks(id) {
   return function (dispatch) {
-    return fetch("http://localhost:9000/toDoAPI/tasks/")
+    return fetch("http://localhost:9000/toDoAPI/tasks/" + id)
       .then((res) => res.json())
       .then((tasks) => {
         dispatch({ type: "LOAD_TASKS_SUCCESS", tasks });
@@ -27,7 +27,7 @@ export function loadTasks() {
   };
 }
 
-export function saveTask(task) {
+export function saveTask(task, list) {
   return function (dispatch) {
     return fetch("http://localhost:9000/toDoAPI/saveTask/", {
       method: "POST",
@@ -37,11 +37,17 @@ export function saveTask(task) {
       },
       body: JSON.stringify({
         task: task.description,
+        list: list.id,
       }),
     })
       .then((res) => res.json())
       .then((id) => {
-        let saved = { ...id, status: "NS", description: task.description };
+        let saved = {
+          ...id,
+          status: "NS",
+          description: task.description,
+          list_id: list.id,
+        };
         dispatch({ type: "SAVE_TASK_SUCCESS", saved });
       });
   };

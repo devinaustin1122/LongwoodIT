@@ -15,7 +15,7 @@ class ToDo extends React.Component {
   };
 
   async componentDidMount() {
-    await this.props.actions.loadTasks();
+    await this.props.actions.loadTasks(this.props.list.id);
     console.log(this.props.tasks);
   }
 
@@ -27,7 +27,7 @@ class ToDo extends React.Component {
 
   handleSubmit = async (event) => {
     event.preventDefault();
-    await this.props.actions.saveTask(this.state.task);
+    await this.props.actions.saveTask(this.state.task, this.props.list);
     this.setState({ task: { description: "" } });
   };
 
@@ -43,7 +43,7 @@ class ToDo extends React.Component {
           handleSubmit={this.handleSubmit}
           handleChange={this.handleChange}
           value={this.state.task.description}
-          title="ToDo"
+          title={this.props.list.name}
           comment="Manage your week with tasks and subtasks"
           to="/File"
         />
@@ -96,6 +96,7 @@ ToDo.propTypes = {
 function mapStateToProps(state) {
   return {
     tasks: state.tasks.all,
+    list: state.lists.active,
   };
 }
 

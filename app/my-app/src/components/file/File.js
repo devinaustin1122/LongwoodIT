@@ -28,6 +28,11 @@ class File extends React.Component {
     this.setState({ list: { name: event.target.value } });
   };
 
+  handleClick = (list) => {
+    console.log(list);
+    this.props.actions.selectList(list);
+  };
+
   render() {
     return (
       <>
@@ -59,7 +64,7 @@ class File extends React.Component {
             {this.props.lists.map((list) => {
               return (
                 <>
-                  <List list={list} />
+                  <List list={list} handleClick={this.handleClick} />
                 </>
               );
             })}
@@ -77,7 +82,7 @@ File.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    lists: state.lists,
+    lists: state.lists.all,
     user: state.users.active,
   };
 }

@@ -10,7 +10,7 @@ import { Switch, Route } from "react-router-dom";
 import { connect } from "react-redux";
 
 function App(props) {
-  if (props.user.length === 0) {
+  if (!props.user) {
     return <Login />;
   } else {
     return (
@@ -18,10 +18,13 @@ function App(props) {
         <Navigation />
         <Switch>
           <Route exact path={["/", "/Home"]} component={Home} />
+          {Object.keys(props.list).length === 0 &&
+            props.list.constructor === Object && (
+              <Route exact path="/ToDo" component={File} />
+            )}
+          <Route exact path="/ToDo" component={ToDo} />
           <Route exact path="/File" component={File} />
-          <Route path="/ToDo" component={ToDo} />
-          <Route path="/ToDo/:list" component={ToDo} />
-          <Route path="/Manage" component={ManageTask} />
+          <Route path="/Manage/" component={ManageTask} />
           <Route path="*" component={FileNotFound} />
         </Switch>
       </div>
@@ -32,6 +35,7 @@ function App(props) {
 function mapStateToProps(state, props) {
   return {
     user: state.users.active,
+    list: state.lists.active,
   };
 }
 
