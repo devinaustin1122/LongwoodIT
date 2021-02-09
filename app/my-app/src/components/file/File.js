@@ -47,10 +47,12 @@ class File extends React.Component {
 
         <div className="jumbotron jumbotron-fluid gradient-h text-light">
           <div className="container">
-            <h1 className="display-4">Please select a task list</h1>
+            <h1 className="display-4">Select or create a task list</h1>
             <p>
               You must select a task list in order to create tasks, subtasks and
-              all other features
+              use all other features. Toggle the dropdown menu above to add a
+              new task list or select an existing one from the sidebar to the
+              left.
             </p>
           </div>
         </div>
