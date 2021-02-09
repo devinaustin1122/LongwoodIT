@@ -52,7 +52,7 @@ class File extends React.Component {
               You must select a task list in order to create tasks, subtasks and
               use all other features. Toggle the dropdown menu above to add a
               new task list or select an existing one from the sidebar to the
-              left.
+              leftg.
             </p>
           </div>
         </div>
