@@ -76,7 +76,9 @@ class ToDo extends React.Component {
           to="/File"
         />
         <div className="countainer-fluid p-5 text-light gradient-h fade-in">
-          <h1 className="display-4">Not Started</h1>
+          {this.props.tasks.NS[0] !== undefined && (
+            <h1 className="display-4">Not Started</h1>
+          )}
           {this.props.tasks.NS[0] !== undefined &&
             this.props.tasks.NS.map((task) => (
               <Task
@@ -85,7 +87,9 @@ class ToDo extends React.Component {
                 handleClick={this.handleTaskClick}
               />
             ))}
-          <h1 className="display-4">In Progress</h1>
+          {this.props.tasks.IP[0] !== undefined && (
+            <h1 className="display-4">In Progress</h1>
+          )}
           {this.props.tasks.IP[0] !== undefined &&
             this.props.tasks.IP.map((task) => (
               <Task
@@ -94,7 +98,9 @@ class ToDo extends React.Component {
                 handleClick={this.handleTaskClick}
               />
             ))}
-          <h1 className="display-4">Complete</h1>
+          {this.props.tasks.C[0] !== undefined && (
+            <h1 className="display-4">Complete</h1>
+          )}
           {this.props.tasks.C[0] !== undefined &&
             this.props.tasks.C.map((task) => (
               <Task
@@ -107,7 +113,6 @@ class ToDo extends React.Component {
         )
       </>
     );
-    // );
   }
 }
 
