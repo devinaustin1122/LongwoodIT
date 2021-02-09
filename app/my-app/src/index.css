@@ -39,8 +39,19 @@ p {
   animation-fill-mode: forwards;
 }
 
-.black {
-  background-color: gray;
+.sidebar {
+  height: 100%;
+  width: 10%;
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  background-color: #e9ecef;
+  border-right: ridge;
+}
+
+.content {
+  margin: 0px;
+  margin-left: 10%;
 }
 
 .transparent {
