@@ -121,15 +121,30 @@ router.post("/list/create/", function (req, res, next) {
 });
 
 router.post("/login/", function (req, res, next) {
-  const today = new Date();
+  "SELECT id FROM users WHERE password = '" +
+    req.body.password +
+    "' AND id = '" +
+    req.body.user +
+    "';",
+    console.log(
+      "SELECT id FROM users WHERE password = '" +
+        req.body.password +
+        "' AND id = '" +
+        req.body.user +
+        "';"
+    );
   connection.query(
-    "SELECT id FROM users WHERE password = '" + req.body.password + "'",
+    "SELECT id FROM users WHERE password = '" +
+      req.body.password +
+      "' AND id = '" +
+      req.body.user +
+      "'",
     function (err, result, fields) {
       if (err) throw err;
       if (result.length) {
         res.json({ id: result[0].id });
       } else {
-        res.json({ id: "Access denied" });
+        res.json({ id: "" });
       }
     }
   );

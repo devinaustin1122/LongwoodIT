@@ -6,7 +6,7 @@ const List = (props) => {
   return (
     <div className="row fade-in">
       <div className="col-11">
-        <p className="lead m-0 task">{props.list.name}</p>
+        <p className="m-0 lead task">{props.list.name}</p>
       </div>
       <div className="col-1">
         <Link to={"/ToDo"}>
@@ -26,7 +26,6 @@ const List = (props) => {
           </svg>
         </Link>
       </div>
-      <hr />
     </div>
   );
 };

@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import * as userActions from "../../redux/actions/userActions.js";
 import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
+import { store } from "react-notifications-component";
 
 class Login extends React.Component {
   state = {
@@ -71,10 +72,17 @@ class Login extends React.Component {
   }
 }
 
+function mapStateToProps(state, props) {
+  return {
+    user: state.users.active,
+    users: state.users,
+  };
+}
+
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators(userActions, dispatch),
   };
 }
 
-export default connect(null, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

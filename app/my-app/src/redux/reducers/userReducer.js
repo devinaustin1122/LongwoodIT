@@ -4,7 +4,7 @@ export default function taskReducer(state = { active: "" }, action) {
       if (action.user === action.id) {
         return { active: action.id };
       } else {
-        return { active: "test" };
+        return { active: "dyerda" };
       }
     default:
       return state;
