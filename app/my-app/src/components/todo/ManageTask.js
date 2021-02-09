@@ -55,7 +55,7 @@ class ManageTask extends React.Component {
           title="Subtask"
         />
 
-        <div className="jumbotron jumbotron-fluid gradient-h text-light fade-in">
+        <div className="jumbotron jumbotron-fluid gradient-h text-light fade-in m-0">
           <div className="container">
             <div className="d-flex justify-content-between">
               <div>

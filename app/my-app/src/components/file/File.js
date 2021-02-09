@@ -36,23 +36,13 @@ class File extends React.Component {
   render() {
     return (
       <>
-        <DropdownInput
-          handleSubmit={this.handleSubmit}
-          handleChange={this.handleChange}
-          value={this.state.list.name}
-          placeholder="Enter descriptive name for your list"
-          title="Task List"
-          comment=""
-        />
-
-        <div className="jumbotron jumbotron-fluid gradient-h text-light">
+        <div className="jumbotron jumbotron-fluid gradient-h p-4 text-light">
           <div className="container">
             <h1 className="display-4">Select or create a task list</h1>
             <p>
               You must select a task list in order to create tasks, subtasks and
-              use all other features. Toggle the dropdown menu above to add a
-              new task list or select an existing one from the sidebar to the
-              leftg.
+              use all other features. Use the left side menu to select or create
+              new task lists.
             </p>
           </div>
         </div>

@@ -120,6 +120,25 @@ router.post("/list/create/", function (req, res, next) {
   res.json({ id: uuid });
 });
 
+router.post("/list/delete/", function (req, res, next) {
+  const uuid = uuidv4();
+  console.log(
+    "DELETE FROM lists WHERE id = '" +
+      req.body.id +
+      "' and user= '" +
+      req.body.user +
+      "'"
+  );
+  connection.query(
+    "DELETE FROM lists WHERE id = '" +
+      req.body.id +
+      "' and user= '" +
+      req.body.user +
+      "'"
+  );
+  res.json({ id: uuid });
+});
+
 router.post("/login/", function (req, res, next) {
   "SELECT id FROM users WHERE password = '" +
     req.body.password +

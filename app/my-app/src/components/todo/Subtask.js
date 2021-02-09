@@ -5,7 +5,7 @@ const Subtask = (props) => {
   return (
     <div className="row fade-in" key={props.subtask.description}>
       <div className="col-11">
-        <p className="lead m-0 task">{props.subtask.description}</p>
+        <p className="lead">{props.subtask.description}</p>
       </div>
       <div className="col-1">
         <svg

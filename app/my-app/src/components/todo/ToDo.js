@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import * as taskActions from "../../redux/actions/taskActions";
+import * as listActions from "../../redux/actions/listActions";
 import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
 import Task from "./Task.js";
@@ -41,6 +42,11 @@ class ToDo extends React.Component {
     this.setState({ task: task });
   };
 
+  handleDelete = () => {
+    this.props.actions.deleteList(this.props.list.id, this.props.user);
+    this.props.history.push("/File");
+  };
+
   handleSubmit = async (event) => {
     event.preventDefault();
     await this.props.actions.saveTask(this.state.task, this.props.list);
@@ -69,13 +75,14 @@ class ToDo extends React.Component {
         <DropdownInput
           handleSubmit={this.handleSubmit}
           handleChange={this.handleChange}
+          handleDelete={this.handleDelete}
           value={this.state.task.description}
           title={this.props.list.name}
           placeholder="Enter a task"
           comment="Manage your week with tasks and subtasks"
           to="/File"
         />
-        <div className="countainer-fluid p-5 text-light gradient-h fade-in">
+        <div className="text-light gradient-h fade-in p-5">
           {this.props.tasks.NS[0] !== undefined && (
             <h1 className="display-4">Not Started</h1>
           )}
@@ -125,12 +132,13 @@ function mapStateToProps(state) {
   return {
     tasks: state.tasks.all,
     list: state.lists.active,
+    user: state.users.active,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(taskActions, dispatch),
+    actions: bindActionCreators({ ...taskActions, ...listActions }, dispatch),
   };
 }
 

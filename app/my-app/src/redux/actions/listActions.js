@@ -16,6 +16,22 @@ export function createList(user, name) {
   };
 }
 
+export function deleteList(id, user) {
+  return function (dispatch) {
+    return fetch("http://localhost:9000/toDoAPI/list/delete/", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id,
+        user,
+      }),
+    }).then(() => dispatch({ type: "DELETE_LIST", id, user }));
+  };
+}
+
 export function loadLists(user) {
   return function (dispatch) {
     return fetch("http://localhost:9000/toDoAPI/lists/" + user)
@@ -25,6 +41,7 @@ export function loadLists(user) {
       });
   };
 }
+
 export function selectList(list) {
   return { type: "LIST_SELECTED", list };
 }
