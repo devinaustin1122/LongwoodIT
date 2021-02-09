@@ -8,14 +8,14 @@ const DropdownInput = (props) => {
 
   return (
     <div className="jumbotron jumbotron-fluid m-0 p-0">
-      <div className="container collapse show" id="collapser">
+      <div className="container collapse" id="collapser">
         <h1 className="display-4 m-0 pt-3">{props.title}</h1>
         <p className="lead">{props.comment}</p>
         <form onSubmit={props.handleSubmit}>
           <div className="input-group mb-3">
             <input
               className="form-control"
-              placeholder="Enter a task"
+              placeholder={props.placeholder}
               onChange={props.handleChange}
               value={props.value}
             />

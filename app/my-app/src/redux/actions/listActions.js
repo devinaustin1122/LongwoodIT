@@ -25,3 +25,6 @@ export function loadLists(user) {
       });
   };
 }
+export function selectList(list) {
+  return { type: "LIST_SELECTED", list };
+}

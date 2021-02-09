@@ -17,8 +17,8 @@ body {
 hr {
   width: 100%;
   text-align: left;
-  margin: 10px;
-  background-color: transparent;
+  margin-bottom: 20px;
+  background-color: black;
   border-color: transparent;
 }
 
@@ -27,7 +27,7 @@ h2,
 h3,
 h4,
 h5 {
-  animation: fadeInAnimation ease 1s;
+  animation: fadeInAnimation ease 1.5s;
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
 }
@@ -39,8 +39,19 @@ p {
   animation-fill-mode: forwards;
 }
 
-.black {
-  background-color: gray;
+.sidebar {
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  background-color: #e9ecef;
+  border-right: ridge;
+}
+
+.content {
+  margin: 0px;
+  margin-left: 200px;
 }
 
 .transparent {

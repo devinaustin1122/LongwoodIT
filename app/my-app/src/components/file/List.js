@@ -6,10 +6,10 @@ const List = (props) => {
   return (
     <div className="row fade-in">
       <div className="col-11">
-        <p className="lead m-0 task">{props.list.name}</p>
+        <p className="m-0 lead task">{props.list.name}</p>
       </div>
       <div className="col-1">
-        <Link to={"ToDo/" + props.list.name}>
+        <Link to={"/ToDo"}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"
@@ -17,6 +17,7 @@ const List = (props) => {
             fill="#ffffff"
             className="bi bi-arrows-fullscreen m-2"
             viewBox="0 0 16 16"
+            onClick={() => props.handleClick(props.list)}
           >
             <path
               fillRule="evenodd"
@@ -25,7 +26,6 @@ const List = (props) => {
           </svg>
         </Link>
       </div>
-      <hr />
     </div>
   );
 };

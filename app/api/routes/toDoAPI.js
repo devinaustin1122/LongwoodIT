@@ -21,13 +21,14 @@ connection.connect(function (err) {
   console.log("connected as id " + connection.threadId);
 });
 
-// GET requests
-
-router.get("/tasks/", function (req, res, next) {
-  connection.query("SELECT * FROM tasks", function (error, data, fields) {
-    if (error) throw error;
-    res.json(data);
-  });
+router.get("/tasks/:id", function (req, res, next) {
+  connection.query(
+    "SELECT * FROM tasks WHERE list_id = '" + req.params.id + "'",
+    function (error, data, fields) {
+      if (error) throw error;
+      res.json(data);
+    }
+  );
 });
 
 router.get("/subtasks/:id", function (req, res, next) {
@@ -90,16 +91,18 @@ router.post("/saveSubtask/", function (req, res, next) {
 router.post("/saveTask/", function (req, res, next) {
   const uuid = uuidv4();
   connection.query(
-    "INSERT INTO tasks (id, status, description) VALUES ('" +
+    "INSERT INTO tasks (id, status, description, list_id) VALUES ('" +
       uuid +
       "', 'NS', '" +
       req.body.task +
+      "','" +
+      req.body.list +
       "')",
     function (err, result, fields) {
       if (err) throw err;
-      console.log(result);
     }
   );
+
   res.json({ id: uuid });
 });
 
@@ -118,15 +121,30 @@ router.post("/list/create/", function (req, res, next) {
 });
 
 router.post("/login/", function (req, res, next) {
-  const today = new Date();
+  "SELECT id FROM users WHERE password = '" +
+    req.body.password +
+    "' AND id = '" +
+    req.body.user +
+    "';",
+    console.log(
+      "SELECT id FROM users WHERE password = '" +
+        req.body.password +
+        "' AND id = '" +
+        req.body.user +
+        "';"
+    );
   connection.query(
-    "SELECT id FROM users WHERE password = '" + req.body.password + "'",
+    "SELECT id FROM users WHERE password = '" +
+      req.body.password +
+      "' AND id = '" +
+      req.body.user +
+      "'",
     function (err, result, fields) {
       if (err) throw err;
       if (result.length) {
         res.json({ id: result[0].id });
       } else {
-        res.json({ id: "Access denied" });
+        res.json({ id: "" });
       }
     }
   );

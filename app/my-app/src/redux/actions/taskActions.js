@@ -1,4 +1,4 @@
-// Thunks
+import { store } from "react-notifications-component";
 
 export function deleteTask(task) {
   return function (dispatch) {
@@ -17,9 +17,9 @@ export function deleteTask(task) {
   };
 }
 
-export function loadTasks() {
+export function loadTasks(id) {
   return function (dispatch) {
-    return fetch("http://localhost:9000/toDoAPI/tasks/")
+    return fetch("http://localhost:9000/toDoAPI/tasks/" + id)
       .then((res) => res.json())
       .then((tasks) => {
         dispatch({ type: "LOAD_TASKS_SUCCESS", tasks });
@@ -27,7 +27,7 @@ export function loadTasks() {
   };
 }
 
-export function saveTask(task) {
+export function saveTask(task, list) {
   return function (dispatch) {
     return fetch("http://localhost:9000/toDoAPI/saveTask/", {
       method: "POST",
@@ -37,11 +37,17 @@ export function saveTask(task) {
       },
       body: JSON.stringify({
         task: task.description,
+        list: list.id,
       }),
     })
       .then((res) => res.json())
       .then((id) => {
-        let saved = { ...id, status: "NS", description: task.description };
+        let saved = {
+          ...id,
+          status: "NS",
+          description: task.description,
+          list_id: list.id,
+        };
         dispatch({ type: "SAVE_TASK_SUCCESS", saved });
       });
   };
@@ -60,7 +66,34 @@ export function updateStatus(task, status) {
         status,
       }),
     }).then(() => {
+      store.addNotification({
+        title: "Success",
+        message: "The status has been updated ",
+        type: "default", // 'default', 'success', 'info', 'warning'
+        container: "top-right", // where to position the notifications
+        animationIn: ["animated", "fadeIn"], // animate.css classes that's applied
+        animationOut: ["animated", "fadeOut"], // animate.css classes that's applied
+        dismiss: {
+          duration: 3000,
+        },
+      });
       dispatch({ type: "STATUS_CHANGE", id: task.id, status });
+      // debugger;
+      // store
+      //   .addNotification({
+      //     title: "Success",
+      //     message: "Status updated",
+      //     type: "defualt", // 'default', 'success', 'info', 'warning'
+      //     container: "top-right", // where to position the notifications
+      //     animationIn: ["animated", "fadeIn"], // animate.css classes that's applied
+      //     animationOut: ["animated", "fadeOut"], // animate.css classes that's applied
+      //     dismiss: {
+      //       duration: 3000,
+      //     },
+      //   })
+      //   .then(() => {
+      //     dispatch({ type: "STATUS_CHANGE", id: task.id, status });
+      //   });
     });
   };
 }

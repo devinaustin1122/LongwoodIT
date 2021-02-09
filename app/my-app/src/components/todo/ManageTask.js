@@ -51,8 +51,8 @@ class ManageTask extends React.Component {
           handleChange={this.handleSubtaskChange}
           handleDelete={this.handleDelete}
           value={this.state.subtask.description}
+          placeholder="Enter a subtask"
           title="Subtask"
-          comment="Manage your task"
         />
 
         <div className="jumbotron jumbotron-fluid gradient-h text-light fade-in">
