@@ -34,19 +34,16 @@ class File extends React.Component {
   };
 
   render() {
+    console.log("file rendered");
     return (
-      <>
-        <div className="jumbotron jumbotron-fluid gradient-h p-4 text-light">
-          <div className="container">
-            <h1 className="display-4">Select or create a task list</h1>
-            <p>
-              You must select a task list in order to create tasks, subtasks and
-              use all other features. Use the left side menu to select or create
-              new task lists.
-            </p>
-          </div>
-        </div>
-      </>
+      <div className="text-light gradient-h fade-in p-5">
+        <h1 className="display-4">Select or create a task list</h1>
+        <p>
+          You must select a task list in order to create tasks, subtasks and use
+          all other features. Use the left side menu to select or create new
+          task lists.
+        </p>
+      </div>
     );
   }
 }

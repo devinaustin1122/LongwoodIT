@@ -2,10 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const DropdownInput = (props) => {
-  const handleClick = () => {
-    console.log("Hi");
-  };
-
   return (
     <div className="jumbotron jumbotron-fluid m-0 p-0">
       <div className="container collapse" id="collapser">
@@ -35,7 +31,6 @@ const DropdownInput = (props) => {
           fill="black"
           data-toggle="collapse"
           data-target="#collapser"
-          onClick={() => handleClick}
           className="bi bi-arrows-expand pointer m-2"
           viewBox="0 0 16 16"
         >

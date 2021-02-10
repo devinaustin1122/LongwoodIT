@@ -117,7 +117,6 @@ class ToDo extends React.Component {
               />
             ))}
         </div>
-        )
       </>
     );
   }

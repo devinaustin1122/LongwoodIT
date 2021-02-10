@@ -29,6 +29,7 @@ const App = (props) => {
                   <>
                     <Route exact path="/ToDo" component={File} />
                     <Route exact path="/Manage" component={File} />
+                    <Route exact path="/File" component={File} />
                   </>
                 )}
               <Route exact path="/ToDo" component={ToDo} />
