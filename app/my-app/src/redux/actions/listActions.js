@@ -1,4 +1,4 @@
-export function createList(user, name) {
+export function createList(user, name, description, categories) {
   return function (dispatch) {
     return fetch("http://localhost:9000/toDoAPI/list/create/", {
       method: "POST",
@@ -9,10 +9,12 @@ export function createList(user, name) {
       body: JSON.stringify({
         name,
         user,
+        description,
+        categories,
       }),
     })
       .then((res) => res.json())
-      .then((id) => dispatch({ type: "ADD_LIST", ...id, user, name }));
+      .then((id) => dispatch({ type: "CREATE_LIST", ...id, user }));
   };
 }
 
@@ -43,5 +45,6 @@ export function loadLists(user) {
 }
 
 export function selectList(list) {
+  console.log(list);
   return { type: "LIST_SELECTED", list };
 }

@@ -22,7 +22,8 @@ export function loadTasks(id) {
     return fetch("http://localhost:9000/toDoAPI/tasks/" + id)
       .then((res) => res.json())
       .then((tasks) => {
-        dispatch({ type: "LOAD_TASKS_SUCCESS", tasks });
+        console.log(tasks);
+        dispatch({ type: "LOAD_TASKS", tasks });
       });
   };
 }

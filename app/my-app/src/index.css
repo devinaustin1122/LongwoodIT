@@ -39,6 +39,51 @@ p {
   animation-fill-mode: forwards;
 }
 
+.cat-add {
+  visibility: hidden;
+  opacity: 0;
+  -webkit-transition: all 0.4s ease-in-out 0s;
+  -moz-transition: all 0.4s ease-in-out 0s;
+  transition: all 0.4s ease-in-out 0s;
+}
+
+.category:hover .cat-add {
+  visibility: visible;
+  opacity: 1;
+}
+
+.list {
+  -webkit-transition: all 0.4s ease-in-out 0s;
+  -moz-transition: all 0.4s ease-in-out 0s;
+  transition: all 0.4s ease-in-out 0s;
+}
+
+.list:hover {
+  background-color: black;
+  color: white;
+  border-color: white;
+}
+
+.list-flex {
+  height: 200px;
+  width: 200px;
+  margin: 10px;
+  padding: 5px;
+  border: white solid;
+  border-width: 1px;
+  border-radius: 5px;
+  background-color: rgb(70, 70, 70);
+  -webkit-transition: all 0.4s ease-in-out 0s;
+  -moz-transition: all 0.4s ease-in-out 0s;
+  transition: all 0.4s ease-in-out 0s;
+}
+
+.list-flex:hover {
+  background-color: white;
+  color: black;
+  border-color: black;
+}
+
 .sidebar {
   height: 100%;
   width: 150px;
@@ -51,7 +96,6 @@ p {
 
 .content {
   margin: 0px;
-  margin-left: 150px;
 }
 
 .transparent {
@@ -60,6 +104,10 @@ p {
 
 .gradient-h {
   background-image: linear-gradient(black, transparent);
+  background-color: transparent;
+}
+
+.bg-clear {
   background-color: transparent;
 }
 

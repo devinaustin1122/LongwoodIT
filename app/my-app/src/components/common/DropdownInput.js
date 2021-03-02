@@ -4,26 +4,11 @@ import { Link } from "react-router-dom";
 const DropdownInput = (props) => {
   return (
     <div className="jumbotron jumbotron-fluid m-0 p-0">
-      <div className="container collapse" id="collapser">
+      <div className="container collapse show p-0" id="collapser">
         <h1 className="display-4 m-0 pt-3">{props.title}</h1>
         <p className="lead">{props.comment}</p>
-        <form onSubmit={props.handleSubmit}>
-          <div className="input-group mb-3">
-            <input
-              className="form-control"
-              placeholder={props.placeholder}
-              onChange={props.handleChange}
-              value={props.value}
-            />
-            <div className="input-group-append">
-              <button className="btn btn-secondary" type="submit">
-                Add
-              </button>
-            </div>
-          </div>
-        </form>
       </div>
-      <div className="d-flex justify-content-between align-items-center p-1">
+      <div className="d-flex justify-content-between align-items-center p-1 border-top">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="16"

@@ -35,7 +35,6 @@ class ManageTask extends React.Component {
       this.props.task.id
     );
 
-    console.log(this.props.subtasks);
     this.setState({ subtask: { description: "" } });
   };
 

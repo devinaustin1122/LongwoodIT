@@ -4,6 +4,8 @@ import * as userActions from "../../redux/actions/userActions.js";
 import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
 import { store } from "react-notifications-component";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faClipboardCheck } from "@fortawesome/free-solid-svg-icons";
 
 class Login extends React.Component {
   state = {
@@ -33,39 +35,49 @@ class Login extends React.Component {
   render() {
     return (
       <div className="jumbotron m-5">
-        <div className="container fade-in">
-          <h1 className="display-4">Welcome!</h1>
-          <p className="lead">
-            If you have an account, please enter your username and password.
-            Please contact Devin if you would like to create an account.
-          </p>
-          <form onSubmit={this.handleSubmit}>
-            <div className="input-group mb-3">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Username"
-                aria-label="Username"
-                value={this.state.username}
-                onChange={this.handleUsernameInputChange}
-              />
+        <div className="row">
+          <div className="col-6">
+            <div className="container fade-in">
+              <h1 className="display-4">Welcome!</h1>
+              <p className="lead">
+                If you have an account, please enter your username and password.
+                Please contact Devin if you would like to create an account.
+              </p>
+              <form onSubmit={this.handleSubmit}>
+                <div className="input-group mb-3">
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Username"
+                    aria-label="Username"
+                    value={this.state.username}
+                    onChange={this.handleUsernameInputChange}
+                  />
+                </div>
+                <div className="input-group mb-3">
+                  <input
+                    type="password"
+                    className="form-control"
+                    placeholder="Password"
+                    aria-label="Password"
+                    value={this.state.password}
+                    onChange={this.handlePasswordInputChange}
+                  />
+                  <div className="input-group-append">
+                    <button className="btn btn-secondary" type="submit">
+                      Log In
+                    </button>
+                  </div>
+                </div>
+              </form>
             </div>
-            <div className="input-group mb-3">
-              <input
-                type="password"
-                className="form-control"
-                placeholder="Password"
-                aria-label="Password"
-                value={this.state.password}
-                onChange={this.handlePasswordInputChange}
-              />
-              <div className="input-group-append">
-                <button className="btn btn-secondary" type="submit">
-                  Log In
-                </button>
-              </div>
-            </div>
-          </form>
+          </div>
+          <div
+            className="col-6 d-flex justify-content-center align-items-center"
+            style={{ fontSize: "200px" }}
+          >
+            <FontAwesomeIcon icon={faClipboardCheck} />
+          </div>
         </div>
       </div>
     );

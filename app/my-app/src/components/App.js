@@ -5,7 +5,7 @@ import Home from "./home/Home.js";
 import ToDo from "./todo/ToDo.js";
 import File from "./file/File.js";
 import ManageTask from "./todo/ManageTask.js";
-import Sidebar from "./common/Sidebar.js";
+import Toolbar from "./common/Toolbar.js";
 import FileNotFound from "./FileNotFound.js";
 import { Switch, Route } from "react-router-dom";
 import { connect } from "react-redux";
@@ -19,9 +19,9 @@ const App = (props) => {
       {!props.user && <Login />}
       {props.user && (
         <>
-          <Sidebar />
           <div className="content">
             <Navigation />
+            <Toolbar />
             <Switch>
               <Route exact path={["/", "/Home"]} component={Home} />
               {Object.keys(props.list).length === 0 &&

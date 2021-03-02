@@ -2,11 +2,21 @@ import React from "react";
 import { connect } from "react-redux";
 import * as taskActions from "../../redux/actions/taskActions";
 import * as listActions from "../../redux/actions/listActions";
+import * as categoryActions from "../../redux/actions/categoryActions";
+
 import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
-import Task from "./Task.js";
 import DropdownInput from "../common/DropdownInput";
 import { store } from "react-notifications-component";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faFolderOpen,
+  faEdit,
+  faPlus,
+  faQuestionCircle,
+  faPlusSquare,
+} from "@fortawesome/free-solid-svg-icons";
+import EditCategoryModal from "./modals/EditCategoryModal";
 
 class ToDo extends React.Component {
   state = {
@@ -18,7 +28,7 @@ class ToDo extends React.Component {
   };
 
   async componentDidMount() {
-    await this.props.actions.loadTasks(this.props.list.id);
+    await this.props.actions.loadCategories(this.props.list.id);
     this.setState({ loaded: true });
   }
 
@@ -79,11 +89,11 @@ class ToDo extends React.Component {
           value={this.state.task.description}
           title={this.props.list.name}
           placeholder="Enter a task"
-          comment="Manage your week with tasks and subtasks"
+          comment={this.props.list.description}
           to="/File"
         />
         <div className="text-light gradient-h fade-in p-5">
-          {this.props.tasks.NS[0] !== undefined && (
+          {/* {this.props.tasks.NS[0] !== undefined && (
             <h1 className="display-4">Not Started</h1>
           )}
           {this.props.tasks.NS[0] !== undefined &&
@@ -115,8 +125,29 @@ class ToDo extends React.Component {
                 task={task}
                 handleClick={this.handleTaskClick}
               />
-            ))}
+            ))} */}
+          {this.props.categories.map((category) => {
+            return (
+              <div
+                className="category d-flex flex-row justify-content-start align-items-center pointer"
+                data-toggle="modal"
+                data-target="#editCategoryModal"
+                key={category.id}
+              >
+                <h1 className="display-4">{category.name}</h1>
+                <FontAwesomeIcon className="ml-3 cat-add" icon={faPlus} />
+              </div>
+            );
+          })}
+          {this.props.tasks.map((task) => {
+            return (
+              <p key={task.id} className="lead">
+                {task.description}
+              </p>
+            );
+          })}
         </div>
+        <EditCategoryModal />
       </>
     );
   }
@@ -132,12 +163,16 @@ function mapStateToProps(state) {
     tasks: state.tasks.all,
     list: state.lists.active,
     user: state.users.active,
+    categories: state.categories,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators({ ...taskActions, ...listActions }, dispatch),
+    actions: bindActionCreators(
+      { ...taskActions, ...listActions, ...categoryActions },
+      dispatch
+    ),
   };
 }
 

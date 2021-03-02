@@ -1,7 +1,7 @@
 export default function listReducer(state = { all: [], active: {} }, action) {
   switch (action.type) {
-    case "ADD_LIST":
-      return { all: [...state.all, action], active: state.active };
+    case "CREATE_LIST":
+      return state;
     case "LOAD_LISTS":
       return { all: action.lists, active: state.active };
     case "LIST_SELECTED":

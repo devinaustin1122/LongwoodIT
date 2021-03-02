@@ -1,7 +1,4 @@
-export default function taskReducer(
-  state = { all: { NS: [], IP: [], C: [] }, active: {} },
-  action
-) {
+export default function taskReducer(state = { all: [], active: {} }, action) {
   switch (action.type) {
     case "TASK_SELECTED":
       return { all: state.all, active: action.task };
@@ -21,19 +18,9 @@ export default function taskReducer(
         // all: state.all.filter((list) => list.filter((task) => {return task.id !== action.task.id})),
         active: state.active,
       };
-    case "LOAD_TASKS_SUCCESS":
+    case "LOAD_TASKS":
       return {
-        all: {
-          NS: action.tasks.filter((task) => {
-            return task.status === "NS";
-          }),
-          IP: action.tasks.filter((task) => {
-            return task.status === "IP";
-          }),
-          C: action.tasks.filter((task) => {
-            return task.status === "C";
-          }),
-        },
+        all: action.tasks,
         active: state.active,
       };
 

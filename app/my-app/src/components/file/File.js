@@ -1,11 +1,10 @@
 import React from "react";
+import ListsFlex from "../todo/ListsFlex.js";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import * as listActions from "../../redux/actions/listActions";
+import * as taskActions from "../../redux/actions/taskActions";
 import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
-import List from "../file/List.js";
-import DropdownInput from "../common/DropdownInput.js";
 
 class File extends React.Component {
   state = {
@@ -15,26 +14,10 @@ class File extends React.Component {
   };
 
   componentDidMount() {
-    this.props.actions.loadLists(this.props.user);
+    console.log("hi");
   }
 
-  handleSubmit = (event) => {
-    event.preventDefault();
-    this.props.actions.createList(this.props.user, this.state.list.name);
-  };
-
-  handleChange = (event) => {
-    event.preventDefault();
-    this.setState({ list: { name: event.target.value } });
-  };
-
-  handleClick = (list) => {
-    console.log(list);
-    this.props.actions.selectList(list);
-  };
-
   render() {
-    console.log("file rendered");
     return (
       <div className="text-light gradient-h fade-in p-5">
         <h1 className="display-4">Select or create a task list</h1>
@@ -43,6 +26,14 @@ class File extends React.Component {
           all other features. Use the left side menu to select or create new
           task lists.
         </p>
+        <ListsFlex
+          onClick={(list) => {
+            this.props.actions.selectList(list);
+            this.props.actions.loadTasks(list.id);
+            this.props.history.push("/ToDo");
+          }}
+          lists={this.props.lists}
+        />
       </div>
     );
   }
@@ -62,7 +53,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(listActions, dispatch),
+    actions: bindActionCreators({ ...listActions, ...taskActions }, dispatch),
   };
 }
 

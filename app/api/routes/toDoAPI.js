@@ -51,6 +51,19 @@ router.get("/lists/:user", function (req, res, next) {
   );
 });
 
+router.get("/categories/:list_id", function (req, res, next) {
+  connection.query(
+    "SELECT * FROM categories WHERE list_id = '" + req.params.list_id + "'",
+    function (err, result, fields) {
+      if (err) throw err;
+      if (result.length) {
+        console.log(result);
+        res.json(result);
+      }
+    }
+  );
+});
+
 // POST requests
 
 router.post("/delete/", function (req, res, next) {
@@ -108,27 +121,46 @@ router.post("/saveTask/", function (req, res, next) {
 
 router.post("/list/create/", function (req, res, next) {
   const uuid = uuidv4();
-  connection.query(
-    "INSERT INTO lists (id, name, user) VALUES ('" +
+  console.log(
+    "INSERT INTO lists (id, name, user, description) VALUES ('" +
       uuid +
       "','" +
       req.body.name +
       "', '" +
       req.body.user +
+      "', '" +
+      req.body.description +
       "')"
   );
+  connection.query(
+    "INSERT INTO lists (id, name, user, description) VALUES ('" +
+      uuid +
+      "','" +
+      req.body.name +
+      "', '" +
+      req.body.user +
+      "', '" +
+      req.body.description +
+      "')"
+  );
+
+  for (var i = 0; i < req.body.categories.length; i++) {
+    connection.query(
+      "INSERT INTO categories(id, list_id, name) VALUES ('" +
+        uuidv4() +
+        "', '" +
+        uuid +
+        "', '" +
+        req.body.categories[i] +
+        "')"
+    );
+  }
+
   res.json({ id: uuid });
 });
 
 router.post("/list/delete/", function (req, res, next) {
   const uuid = uuidv4();
-  console.log(
-    "DELETE FROM lists WHERE id = '" +
-      req.body.id +
-      "' and user= '" +
-      req.body.user +
-      "'"
-  );
   connection.query(
     "DELETE FROM lists WHERE id = '" +
       req.body.id +
@@ -145,28 +177,21 @@ router.post("/login/", function (req, res, next) {
     "' AND id = '" +
     req.body.user +
     "';",
-    console.log(
+    connection.query(
       "SELECT id FROM users WHERE password = '" +
         req.body.password +
         "' AND id = '" +
         req.body.user +
-        "';"
-    );
-  connection.query(
-    "SELECT id FROM users WHERE password = '" +
-      req.body.password +
-      "' AND id = '" +
-      req.body.user +
-      "'",
-    function (err, result, fields) {
-      if (err) throw err;
-      if (result.length) {
-        res.json({ id: result[0].id });
-      } else {
-        res.json({ id: "" });
+        "'",
+      function (err, result, fields) {
+        if (err) throw err;
+        if (result.length) {
+          res.json({ id: result[0].id });
+        } else {
+          res.json({ id: "" });
+        }
       }
-    }
-  );
+    );
 });
 
 module.exports = router;
