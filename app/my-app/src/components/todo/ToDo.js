@@ -117,7 +117,6 @@ class ToDo extends React.Component {
                             className="ml-3 hover-show"
                             icon={faEdit}
                           />
-                          {console.log(task)}
                         </div>
                         <EditTaskModal task={task} />
                       </div>
