@@ -61,7 +61,14 @@ p {
 .list:hover {
   background-color: black;
   color: white;
-  border-color: white;
+  border-color: black;
+}
+
+.list-flex > hr {
+  background-color: white;
+  -webkit-transition: all 0.4s ease-in-out 0s;
+  -moz-transition: all 0.4s ease-in-out 0s;
+  transition: all 0.4s ease-in-out 0s;
 }
 
 .list-flex {
@@ -79,9 +86,13 @@ p {
 }
 
 .list-flex:hover {
-  background-color: white;
+  background-color: rgb(159, 228, 255);
   color: black;
   border-color: black;
+}
+
+.list-flex:hover > hr {
+  background-color: black;
 }
 
 .sidebar {

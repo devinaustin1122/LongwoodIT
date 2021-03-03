@@ -57,7 +57,6 @@ router.get("/categories/:list_id", function (req, res, next) {
     function (err, result, fields) {
       if (err) throw err;
       if (result.length) {
-        console.log(result);
         res.json(result);
       }
     }

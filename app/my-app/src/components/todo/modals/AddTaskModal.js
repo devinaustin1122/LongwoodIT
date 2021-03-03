@@ -1,20 +1,22 @@
 import React from "react";
 import Lists from "../../todo/Lists.js";
 
-function EditCategoryModal(props) {
+function AddTaskModal(props) {
   return (
     <div
       className="modal fade"
-      id="editCategoryModal"
+      id="addTaskModal"
       tabIndex="-1"
       role="dialog"
-      aria-labelledby="editCategoryModalLabel"
+      aria-labelledby="addTaskModalLabel"
       aria-hidden="true"
     >
       <div className="modal-dialog" role="document">
         <div className="modal-content">
           <div className="modal-header">
-            <h5 className="modal-title" id="exampleModalLabel"></h5>
+            <h5 className="modal-title" id="exampleModalLabel">
+              Add a task
+            </h5>
             <button
               type="button"
               className="close"
@@ -42,4 +44,4 @@ function EditCategoryModal(props) {
   );
 }
 
-export default EditCategoryModal;
+export default AddTaskModal;

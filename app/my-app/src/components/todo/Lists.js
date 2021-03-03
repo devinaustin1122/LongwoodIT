@@ -17,7 +17,7 @@ function Lists(props) {
             className="list-group-item pointer list"
             key={list.id}
           >
-            <h1 className="lead">{list.name}</h1>
+            <h1 className="lead m-0">{list.name}</h1>
           </li>
         );
       })}

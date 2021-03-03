@@ -16,7 +16,7 @@ import {
   faQuestionCircle,
   faPlusSquare,
 } from "@fortawesome/free-solid-svg-icons";
-import EditCategoryModal from "./modals/EditCategoryModal";
+import AddTaskModal from "./modals/AddTaskModal";
 
 class ToDo extends React.Component {
   state = {
@@ -131,11 +131,11 @@ class ToDo extends React.Component {
               <div
                 className="category d-flex flex-row justify-content-start align-items-center pointer"
                 data-toggle="modal"
-                data-target="#editCategoryModal"
+                data-target="#addTaskModal"
                 key={category.id}
               >
                 <h1 className="display-4">{category.name}</h1>
-                <FontAwesomeIcon className="ml-3 cat-add" icon={faPlus} />
+                <FontAwesomeIcon className="ml-3 cat-add" icon={faEdit} />
               </div>
             );
           })}
@@ -147,7 +147,7 @@ class ToDo extends React.Component {
             );
           })}
         </div>
-        <EditCategoryModal />
+        <AddTaskModal />
       </>
     );
   }
