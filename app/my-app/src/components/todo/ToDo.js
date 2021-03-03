@@ -6,17 +6,12 @@ import * as categoryActions from "../../redux/actions/categoryActions";
 
 import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
-import DropdownInput from "../common/DropdownInput";
+import DropdownHeader from "../common/DropdownHeader";
 import { store } from "react-notifications-component";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faFolderOpen,
-  faEdit,
-  faPlus,
-  faQuestionCircle,
-  faPlusSquare,
-} from "@fortawesome/free-solid-svg-icons";
-import AddTaskModal from "./modals/AddTaskModal";
+import { faEdit } from "@fortawesome/free-solid-svg-icons";
+import EditCategoryModal from "./modals/EditCategoryModal";
+import EditTaskModal from "./modals/EditTaskModal";
 
 class ToDo extends React.Component {
   state = {
@@ -54,13 +49,11 @@ class ToDo extends React.Component {
 
   handleDelete = () => {
     this.props.actions.deleteList(this.props.list.id, this.props.user);
+    this.props.actions.unselectList();
     this.props.history.push("/File");
   };
 
-  handleSubmit = async (event) => {
-    event.preventDefault();
-    await this.props.actions.saveTask(this.state.task, this.props.list);
-    this.setState({ task: { description: "" } });
+  handleTaskCreate = async () => {
     store.addNotification({
       title: "Success",
       message: "Task added",
@@ -82,7 +75,7 @@ class ToDo extends React.Component {
   render() {
     return (
       <>
-        <DropdownInput
+        <DropdownHeader
           handleSubmit={this.handleSubmit}
           handleChange={this.handleChange}
           handleDelete={this.handleDelete}
@@ -92,62 +85,49 @@ class ToDo extends React.Component {
           comment={this.props.list.description}
           to="/File"
         />
-        <div className="text-light gradient-h fade-in p-5">
-          {/* {this.props.tasks.NS[0] !== undefined && (
-            <h1 className="display-4">Not Started</h1>
-          )}
-          {this.props.tasks.NS[0] !== undefined &&
-            this.props.tasks.NS.map((task) => (
-              <Task
-                key={task.id}
-                task={task}
-                handleClick={this.handleTaskClick}
-              />
-            ))}
-          {this.props.tasks.IP[0] !== undefined && (
-            <h1 className="display-4">In Progress</h1>
-          )}
-          {this.props.tasks.IP[0] !== undefined &&
-            this.props.tasks.IP.map((task) => (
-              <Task
-                key={task.id}
-                task={task}
-                handleClick={this.handleTaskClick}
-              />
-            ))}
-          {this.props.tasks.C[0] !== undefined && (
-            <h1 className="display-4">Complete</h1>
-          )}
-          {this.props.tasks.C[0] !== undefined &&
-            this.props.tasks.C.map((task) => (
-              <Task
-                key={task.id}
-                task={task}
-                handleClick={this.handleTaskClick}
-              />
-            ))} */}
+        <div className="text-light gradient-h p-5">
           {this.props.categories.map((category) => {
             return (
-              <div
-                className="category d-flex flex-row justify-content-start align-items-center pointer"
-                data-toggle="modal"
-                data-target="#addTaskModal"
-                key={category.id}
-              >
-                <h1 className="display-4">{category.name}</h1>
-                <FontAwesomeIcon className="ml-3 cat-add" icon={faEdit} />
+              <div key={category.id}>
+                <div
+                  className="hover-show-container d-flex flex-row justify-content-start align-items-center pointer"
+                  data-toggle="modal"
+                  data-target={"#editCategoryModal" + category.id}
+                >
+                  <h1 className="display-4">{category.name}</h1>
+                  <FontAwesomeIcon className="ml-3 hover-show" icon={faEdit} />
+                </div>
+                <EditCategoryModal
+                  handleTaskCreate={this.handleTaskCreate}
+                  category={category}
+                />
+                {this.props.tasks.map((task) => {
+                  if (task.category_id === category.id) {
+                    return (
+                      <div key={task.id}>
+                        <div
+                          className="hover-show-container d-flex flex-row justify-content-start align-items-center m-1 pointer"
+                          data-toggle="modal"
+                          data-target={"#editTaskModal" + task.id}
+                        >
+                          <p key={task.id} className="lead m-0">
+                            {task.description}
+                          </p>
+                          <FontAwesomeIcon
+                            className="ml-3 hover-show"
+                            icon={faEdit}
+                          />
+                          {console.log(task)}
+                        </div>
+                        <EditTaskModal task={task} />
+                      </div>
+                    );
+                  }
+                })}
               </div>
             );
           })}
-          {this.props.tasks.map((task) => {
-            return (
-              <p key={task.id} className="lead">
-                {task.description}
-              </p>
-            );
-          })}
         </div>
-        <AddTaskModal />
       </>
     );
   }

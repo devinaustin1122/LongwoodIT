@@ -13,13 +13,9 @@ class File extends React.Component {
     },
   };
 
-  componentDidMount() {
-    console.log("hi");
-  }
-
   render() {
     return (
-      <div className="text-light gradient-h fade-in p-5">
+      <div className="text-light gradient-h p-5">
         <h1 className="display-4">Select or create a task list</h1>
         <p>
           You must select a task list in order to create tasks, subtasks and use

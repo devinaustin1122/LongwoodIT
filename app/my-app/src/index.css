@@ -39,7 +39,7 @@ p {
   animation-fill-mode: forwards;
 }
 
-.cat-add {
+.hover-show {
   visibility: hidden;
   opacity: 0;
   -webkit-transition: all 0.4s ease-in-out 0s;
@@ -47,7 +47,7 @@ p {
   transition: all 0.4s ease-in-out 0s;
 }
 
-.category:hover .cat-add {
+.hover-show-container:hover .hover-show {
   visibility: visible;
   opacity: 1;
 }
@@ -66,16 +66,14 @@ p {
 
 .list-flex > hr {
   background-color: white;
-  -webkit-transition: all 0.4s ease-in-out 0s;
-  -moz-transition: all 0.4s ease-in-out 0s;
-  transition: all 0.4s ease-in-out 0s;
 }
 
 .list-flex {
+  text-align: center;
   height: 200px;
   width: 200px;
   margin: 10px;
-  padding: 5px;
+  padding: 10px;
   border: white solid;
   border-width: 1px;
   border-radius: 5px;
@@ -86,13 +84,7 @@ p {
 }
 
 .list-flex:hover {
-  background-color: rgb(159, 228, 255);
-  color: black;
-  border-color: black;
-}
-
-.list-flex:hover > hr {
-  background-color: black;
+  background-color: rgb(104, 108, 109);
 }
 
 .sidebar {

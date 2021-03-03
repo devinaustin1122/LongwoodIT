@@ -4,7 +4,6 @@ import Login from "./login/Login.js";
 import Home from "./home/Home.js";
 import ToDo from "./todo/ToDo.js";
 import File from "./file/File.js";
-import ManageTask from "./todo/ManageTask.js";
 import Toolbar from "./common/Toolbar.js";
 import FileNotFound from "./FileNotFound.js";
 import { Switch, Route } from "react-router-dom";
@@ -28,13 +27,11 @@ const App = (props) => {
                 props.list.constructor === Object && (
                   <>
                     <Route exact path="/ToDo" component={File} />
-                    <Route exact path="/Manage" component={File} />
                     <Route exact path="/File" component={File} />
                   </>
                 )}
               <Route exact path="/ToDo" component={ToDo} />
               <Route exact path="/File" component={File} />
-              <Route exact path="/Manage" component={ManageTask} />
               <Route path="*" component={FileNotFound} />
             </Switch>
           </div>

@@ -22,32 +22,32 @@ export function loadTasks(id) {
     return fetch("http://localhost:9000/toDoAPI/tasks/" + id)
       .then((res) => res.json())
       .then((tasks) => {
-        console.log(tasks);
         dispatch({ type: "LOAD_TASKS", tasks });
       });
   };
 }
 
-export function saveTask(task, list) {
+export function saveTask(description, list_id, category_id) {
   return function (dispatch) {
-    return fetch("http://localhost:9000/toDoAPI/saveTask/", {
+    return fetch("http://localhost:9000/toDoAPI/task/save/", {
       method: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        task: task.description,
-        list: list.id,
+        description,
+        list_id,
+        category_id,
       }),
     })
       .then((res) => res.json())
       .then((id) => {
         let saved = {
           ...id,
-          status: "NS",
-          description: task.description,
-          list_id: list.id,
+          category_id,
+          description,
+          list_id,
         };
         dispatch({ type: "SAVE_TASK_SUCCESS", saved });
       });

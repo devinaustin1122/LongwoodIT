@@ -30,6 +30,13 @@ function CreateModal(props) {
     setCategories(categories.concat(name));
   }
 
+  function clearFields() {
+    setCategory("");
+    setName("");
+    setDescription("");
+    setCategories([]);
+  }
+
   return (
     <div
       className="modal fade"
@@ -98,6 +105,7 @@ function CreateModal(props) {
           </div>
           <div className="modal-footer">
             <button
+              data-dismiss="modal"
               onClick={() => {
                 props.actions.createList(
                   props.user,
@@ -106,6 +114,7 @@ function CreateModal(props) {
                   categories
                 );
                 props.actions.loadLists(props.user);
+                clearFields();
               }}
               type="button"
               className="btn btn-primary"

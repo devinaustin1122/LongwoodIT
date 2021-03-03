@@ -6,6 +6,8 @@ export default function listReducer(state = { all: [], active: {} }, action) {
       return { all: action.lists, active: state.active };
     case "LIST_SELECTED":
       return { all: state.all, active: action.list };
+    case "LIST_UNSELECTED":
+      return { all: state.all, active: {} };
     case "DELETE_LIST":
       return {
         all: state.all.filter((list) => {

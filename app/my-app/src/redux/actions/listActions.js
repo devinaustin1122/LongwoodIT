@@ -45,6 +45,9 @@ export function loadLists(user) {
 }
 
 export function selectList(list) {
-  console.log(list);
   return { type: "LIST_SELECTED", list };
+}
+
+export function unselectList() {
+  return { type: "LIST_UNSELECTED" };
 }

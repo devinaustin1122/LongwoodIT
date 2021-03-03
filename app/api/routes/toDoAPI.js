@@ -100,21 +100,22 @@ router.post("/saveSubtask/", function (req, res, next) {
   res.json({ id: uuid });
 });
 
-router.post("/saveTask/", function (req, res, next) {
+router.post("/task/save", function (req, res, next) {
   const uuid = uuidv4();
   connection.query(
-    "INSERT INTO tasks (id, status, description, list_id) VALUES ('" +
+    "INSERT INTO tasks (id, category_id, description, list_id) VALUES ('" +
       uuid +
-      "', 'NS', '" +
-      req.body.task +
+      "', '" +
+      req.body.category_id +
+      "', '" +
+      req.body.description +
       "','" +
-      req.body.list +
+      req.body.list_id +
       "')",
     function (err, result, fields) {
       if (err) throw err;
     }
   );
-
   res.json({ id: uuid });
 });
 

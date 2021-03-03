@@ -27,11 +27,7 @@ export default function taskReducer(state = { all: [], active: {} }, action) {
     // return { all: action.tasks, active: state.active };
     case "SAVE_TASK_SUCCESS":
       return {
-        all: {
-          NS: [...state.all.NS, action.saved],
-          IP: state.all.IP,
-          C: state.all.C,
-        },
+        all: state.all.concat(action.saved),
         active: state.active,
       };
     case "STATUS_CHANGE":
