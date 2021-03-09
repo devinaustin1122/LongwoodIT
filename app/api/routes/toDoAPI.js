@@ -195,6 +195,20 @@ router.post("/list/delete/", function (req, res, next) {
   res.json({ id: uuid });
 });
 
+router.post("/category/save/", function (req, res, next) {
+  const uuid = uuidv4();
+  connection.query(
+    "INSERT INTO categories(id, list_id, name) VALUES ('" +
+      uuidv4() +
+      "', '" +
+      req.body.list_id +
+      "', '" +
+      req.body.categories[i] +
+      "')"
+  );
+  res.json({ id: uuid });
+});
+
 router.post("/login/", function (req, res, next) {
   "SELECT id FROM users WHERE password = '" +
     req.body.password +

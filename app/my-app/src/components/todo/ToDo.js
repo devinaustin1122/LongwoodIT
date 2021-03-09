@@ -11,6 +11,7 @@ import { store } from "react-notifications-component";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faPlus } from "@fortawesome/free-solid-svg-icons";
 import EditCategoryModal from "./modals/EditCategoryModal";
+import AddCategoryModal from "./modals/AddCategoryModal";
 import EditTaskModal from "./modals/EditTaskModal";
 
 class ToDo extends React.Component {
@@ -126,7 +127,7 @@ class ToDo extends React.Component {
                             icon={faEdit}
                           />
                         </div>
-                        <EditTaskModal task={task} />
+                        <EditTaskModal data-toggle="modal" task={task} />
                       </div>
                     );
                   }
@@ -134,8 +135,15 @@ class ToDo extends React.Component {
               </div>
             );
           })}
-          <FontAwesomeIcon icon={faPlus} className="fa-3x fade-hover" />
+          <FontAwesomeIcon
+            icon={faPlus}
+            data-toggle="modal"
+            data-target="#addCategoryModal"
+            className="fa-3x add-category"
+            list={this.props.list}
+          />
         </div>
+        <AddCategoryModal />
       </>
     );
   }

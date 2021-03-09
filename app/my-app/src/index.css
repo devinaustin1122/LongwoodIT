@@ -146,7 +146,7 @@ p {
   background-color: white;
 }
 
-.fade-hover {
+.add-category {
   -webkit-transition: all 0.4s ease-in-out 0s;
   -moz-transition: all 0.4s ease-in-out 0s;
   transition: all 0.4s ease-in-out 0s;
@@ -154,7 +154,7 @@ p {
   margin-top: auto;
 }
 
-.fade-hover:hover {
+.add-category:hover {
   opacity: 1;
 }
 
