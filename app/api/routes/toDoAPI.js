@@ -119,19 +119,43 @@ router.post("/task/save", function (req, res, next) {
   res.json({ id: uuid });
 });
 
+router.post("/task/edit", function (req, res, next) {
+  connection.query(
+    "UPDATE tasks SET description = '" +
+      req.body.description +
+      "' WHERE id = '" +
+      req.body.id +
+      "'",
+    function (err, result, fields) {
+      if (err) throw err;
+    }
+  );
+  res.end();
+});
+
+router.post("/task/status", function (req, res, next) {
+  console.log(
+    "UPDATE tasks SET complete = '" +
+      req.body.status +
+      "' WHERE id = '" +
+      req.body.id +
+      "'"
+  );
+  connection.query(
+    "UPDATE tasks SET complete = '" +
+      req.body.status +
+      "' WHERE id = '" +
+      req.body.id +
+      "'",
+    function (err, result, fields) {
+      if (err) throw err;
+    }
+  );
+  res.end();
+});
+
 router.post("/list/create/", function (req, res, next) {
   const uuid = uuidv4();
-  console.log(
-    "INSERT INTO lists (id, name, user, description) VALUES ('" +
-      uuid +
-      "','" +
-      req.body.name +
-      "', '" +
-      req.body.user +
-      "', '" +
-      req.body.description +
-      "')"
-  );
   connection.query(
     "INSERT INTO lists (id, name, user, description) VALUES ('" +
       uuid +

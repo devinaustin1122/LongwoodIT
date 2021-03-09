@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as taskActions from "../../../redux/actions/taskActions.js";
 
 function EditCategoryModal(props) {
-  const [task, setTask] = useState("");
+  const [task, setTask] = useState(props.task.description);
+  const [complete, setComplete] = useState(props.task.complete);
 
   function handleTaskChange(event) {
     event.preventDefault();
@@ -26,7 +27,7 @@ function EditCategoryModal(props) {
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title" id="editTaskModalLabel">
-              {props.task.name}
+              Edit task
             </h5>
             <button
               type="button"
@@ -38,7 +39,6 @@ function EditCategoryModal(props) {
             </button>
           </div>
           <div className="modal-body">
-            <h5 className="lead">Add tasks</h5>
             <div className="input-group mb-3">
               <input
                 value={task}
@@ -46,30 +46,43 @@ function EditCategoryModal(props) {
                 type="text"
                 className="form-control"
               />
-              <div className="input-group-append">
-                <span
-                  className="input-group-text"
-                  id="basic-addon2"
-                  //   onClick={() => {
-                  //     props.actions.saveTask(
-                  //       task,
-                  //       props.list.id,
-                  //       props.category.id
-                  //     );
-                  //   }}
-                >
-                  <FontAwesomeIcon icon={faPlus} />
-                </span>
-              </div>
+            </div>
+            <div className="form-check">
+              <input
+                className="form-check-input"
+                type="checkbox"
+                id="taskComplete"
+                checked={complete}
+                onChange={() => setComplete(!complete)}
+              />
+              <label className="form-check-label" htmlFor="taskComplete">
+                Complete
+              </label>
             </div>
           </div>
           <div className="modal-footer">
             <button
-              type="button"
-              className="btn btn-secondary"
               data-dismiss="modal"
+              onClick={() => {
+                props.actions.editTask(task, props.task.id);
+                if (complete) {
+                  props.actions.taskStatus(props.task.id, complete);
+                } else {
+                  props.actions.taskStatus(props.task.id, complete);
+                }
+              }}
+              type="button"
+              className="btn btn-primary"
             >
-              Close
+              Save
+            </button>
+            <button
+              data-dismiss="modal"
+              onClick={() => props.actions.deleteTask(props.task.id)}
+              type="button"
+              className="btn btn-danger"
+            >
+              Delete
             </button>
           </div>
         </div>

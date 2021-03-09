@@ -146,7 +146,29 @@ p {
   background-color: white;
 }
 
-.h-600 {
-  min-height: 600;
-  max-height: 600;
+.fade-hover {
+  -webkit-transition: all 0.4s ease-in-out 0s;
+  -moz-transition: all 0.4s ease-in-out 0s;
+  transition: all 0.4s ease-in-out 0s;
+  opacity: 0.2;
+  margin-top: auto;
+}
+
+.fade-hover:hover {
+  opacity: 1;
+}
+
+.jumbotron-login {
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 50px;
+  min-width: 600px;
+}
+
+.login {
+  width: 70%;
+}
+
+.c {
+  color: rgb(36, 255, 36);
 }

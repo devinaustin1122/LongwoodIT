@@ -9,7 +9,7 @@ import { bindActionCreators } from "redux";
 import DropdownHeader from "../common/DropdownHeader";
 import { store } from "react-notifications-component";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit } from "@fortawesome/free-solid-svg-icons";
+import { faEdit, faPlus } from "@fortawesome/free-solid-svg-icons";
 import EditCategoryModal from "./modals/EditCategoryModal";
 import EditTaskModal from "./modals/EditTaskModal";
 
@@ -110,7 +110,15 @@ class ToDo extends React.Component {
                           data-toggle="modal"
                           data-target={"#editTaskModal" + task.id}
                         >
-                          <p key={task.id} className="lead m-0">
+                          <p
+                            key={task.id}
+                            style={
+                              task.complete
+                                ? { color: "#03fc20" }
+                                : { color: "white" }
+                            }
+                            className={"lead m-0 " + task.status}
+                          >
                             {task.description}
                           </p>
                           <FontAwesomeIcon
@@ -126,6 +134,7 @@ class ToDo extends React.Component {
               </div>
             );
           })}
+          <FontAwesomeIcon icon={faPlus} className="fa-3x fade-hover" />
         </div>
       </>
     );

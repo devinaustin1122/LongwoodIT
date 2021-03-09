@@ -26,7 +26,7 @@ function EditCategoryModal(props) {
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title" id="editCategoryModalLabel">
-              {props.category.name}
+              Add tasks
             </h5>
             <button
               type="button"
@@ -38,7 +38,6 @@ function EditCategoryModal(props) {
             </button>
           </div>
           <div className="modal-body">
-            <h5 className="lead">Add tasks</h5>
             <div className="input-group mb-3">
               <input
                 value={task}

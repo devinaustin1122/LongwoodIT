@@ -4,6 +4,8 @@ import OpenModal from "../file/modals/OpenModal.js";
 import CreateModal from "../file/modals/CreateModal.js";
 import * as listActions from "../../redux/actions/listActions";
 import * as taskActions from "../../redux/actions/taskActions";
+import * as categoryActions from "../../redux/actions/categoryActions";
+
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -58,6 +60,7 @@ class Toolbar extends React.Component {
           onClick={(list) => {
             this.props.actions.selectList(list);
             this.props.actions.loadTasks(list.id);
+            this.props.actions.loadCategories(list.id);
             this.props.history.push("/ToDo");
           }}
           lists={this.props.lists}
@@ -77,7 +80,10 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators({ ...listActions, ...taskActions }, dispatch),
+    actions: bindActionCreators(
+      { ...listActions, ...taskActions, ...categoryActions },
+      dispatch
+    ),
   };
 }
 
